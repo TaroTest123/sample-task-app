@@ -1,0 +1,24 @@
+name: Jira Bot
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        required: true
+      comment:
+        required: true
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: コメントを投稿
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt(inputs.issue_number),
+              body: inputs.comment
+            });
