@@ -19,6 +19,6 @@ jobs:
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: parseInt(inputs.issue_number),
-              body: inputs.comment
+              issue_number: parseInt(context.payload.inputs.issue_number),
+              body: context.payload.inputs.comment
             });
